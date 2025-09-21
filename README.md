@@ -111,10 +111,6 @@ See `CODING_MISTAKES_MADE.md` for critical development lessons.
 3. Ensure standards compliance using `standards_crosswalk.yaml`
 4. Document empirical results, not simulations
 
-## License
-
-This project is released under the MIT License.
-
 ## Disclaimer
 
 This system is for research and educational purposes. Not certified for production identity verification. Always comply with local privacy and data protection regulations.
