@@ -1,0 +1,68 @@
+{
+  "test_metadata": {
+    "test_date": "2025-09-20",
+    "test_type": "DeepAgents Workflow End-to-End",
+    "tools_used": [
+      "OpenCV",
+      "zxing-cpp",
+      "Standards validation"
+    ],
+    "test_scope": "Mock government ID documents"
+  },
+  "performance_summary": {
+    "success_rate": 0.0,
+    "successful_tests": 0,
+    "total_tests": 3,
+    "agent_execution": {},
+    "avg_compliance_checks": 0,
+    "total_errors": 0
+  },
+  "detailed_results": [
+    {
+      "test_case": "Simple Government ID",
+      "image_path": "test_data/simple_text.png",
+      "workflow_status": "error",
+      "agents_executed": [],
+      "data_extracted": false,
+      "validation_completed": false,
+      "compliance_checks": 0,
+      "report_generated": false,
+      "errors": [],
+      "success": false
+    },
+    {
+      "test_case": "Mock MRZ Document",
+      "image_path": "test_data/mock_mrz.png",
+      "workflow_status": "error",
+      "agents_executed": [],
+      "data_extracted": false,
+      "validation_completed": false,
+      "compliance_checks": 0,
+      "report_generated": false,
+      "errors": [],
+      "success": false
+    },
+    {
+      "test_case": "Mock Barcode Document",
+      "image_path": "test_data/mock_barcode.png",
+      "workflow_status": "error",
+      "agents_executed": [],
+      "data_extracted": false,
+      "validation_completed": false,
+      "compliance_checks": 0,
+      "report_generated": false,
+      "errors": [],
+      "success": false
+    }
+  ],
+  "conclusions": {
+    "workflow_viability": false,
+    "ready_for_production": false,
+    "next_steps": [
+      "Fix tool integration issues",
+      "Add real dataset testing",
+      "Improve error handling",
+      "Optimize agent coordination"
+    ]
+  }
+}

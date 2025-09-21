@@ -1,0 +1,231 @@
+meta:
+  version: "prototype-v1"
+  created: "2025-09-20"
+  description: "Demo: Standards crosswalk for Medium article prototype"
+  disclaimer: |
+    PROTOTYPE FOR EDUCATIONAL DEMO ONLY
+    This is a proof-of-concept built for a Medium article demonstration.
+    NOT for production use. NOT certified or compliant with any standards.
+    Shows how agentic AI can be organized around compliance frameworks.
+  sources:
+    nist: "SP 800-63-4 (referenced for demo structure)"
+    icao: "Doc 9303 (referenced for MRZ examples)"
+    aamva: "DL/ID Standard (referenced for PDF417 examples)"
+    iso: "ISO/IEC 30107-3 (referenced for PAD concepts)"
+  author: "Medium Article Demo"
+  last_updated: "2025-09-20"
+
+controls:
+  # NIST SP 800-63-4 Identity Assurance Level Controls
+  - id: NIST-IAL-2-DOC-EVIDENCE
+    ref: "NIST SP 800-63-4 §5.2.1 (Identity Evidence)"
+    requirement: "Superior or strong evidence validated for identity proofing"
+    mechanism:
+      - "OCR extraction from government-issued ID"
+      - "MRZ parsing with checksum validation"
+      - "Cross-validation between visual and machine-readable data"
+    evidence: ["checks/ocr_extraction.json", "checks/mrz_validation.json"]
+    tests: ["tests/nist_ial2_evidence.yaml"]
+    agent_mapping:
+      extract_agent: "OCR and MRZ data extraction"
+      checks_agent: "Cross-validation and consistency checks"
+    status: "planned"
+
+  - id: NIST-IAL-2-DOC-VALIDATION
+    ref: "NIST SP 800-63-4 §5.2.2 (Evidence Validation)"
+    requirement: "Evidence authenticity and integrity verification"
+    mechanism:
+      - "Document tampering detection"
+      - "Security feature verification"
+      - "Issuer validation against known patterns"
+    evidence: ["checks/authenticity_analysis.json"]
+    tests: ["tests/nist_ial2_validation.yaml"]
+    agent_mapping:
+      checks_agent: "Security feature verification"
+      critic_agent: "Authenticity assessment and reasoning"
+    status: "planned"
+
+  # ICAO Doc 9303 Machine Readable Travel Document Controls
+  - id: ICAO-9303-MRZ-FORMAT
+    ref: "ICAO Doc 9303 Part 3 (TD1/TD3 MRZ Structure)"
+    requirement: "MRZ conforms to ICAO format specifications"
+    mechanism:
+      - "PassportEye MRZ structure parsing"
+      - "Field length and character validation"
+      - "Document type identification (TD1/TD3)"
+    evidence: ["reports/mrz_format_check.json"]
+    tests: ["tests/icao_mrz_format.yaml"]
+    agent_mapping:
+      extract_agent: "MRZ parsing using PassportEye"
+      checks_agent: "Format compliance validation"
+    status: "active"
+
+  - id: ICAO-9303-MRZ-CHECKSUM
+    ref: "ICAO Doc 9303 Part 3 (Check Digit Calculation)"
+    requirement: "All MRZ check digits must validate correctly"
+    mechanism:
+      - "Document number check digit verification"
+      - "Date of birth check digit verification"
+      - "Date of expiry check digit verification"
+      - "Composite check digit verification"
+    evidence: ["reports/mrz_checksum_results.json"]
+    tests: ["tests/icao_mrz_checksum.yaml"]
+    agent_mapping:
+      extract_agent: "Check digit extraction"
+      checks_agent: "Mathematical validation per ICAO algorithms"
+    status: "active"
+
+  # AAMVA Driver's License/ID Card Controls
+  - id: AAMVA-PDF417-DECODE
+    ref: "AAMVA 2020 DL/ID Annex D (PDF417 Data Elements)"
+    requirement: "PDF417 barcode successfully decoded with valid structure"
+    mechanism:
+      - "zxing-cpp PDF417 decoding"
+      - "AAMVA data element parsing"
+      - "Header and data segment validation"
+    evidence: ["reports/pdf417_decode.json"]
+    tests: ["tests/aamva_pdf417_decode.yaml"]
+    agent_mapping:
+      extract_agent: "PDF417 barcode decoding using zxing-cpp"
+      checks_agent: "AAMVA format validation"
+    status: "active"
+
+  - id: AAMVA-MANDATORY-FIELDS
+    ref: "AAMVA 2020 DL/ID §4.2 (Mandatory Data Elements)"
+    requirement: "All mandatory data elements present and valid"
+    mandatory_fields:
+      - "DAC: First Name"
+      - "DCS: Last Name"
+      - "DBB: Date of Birth"
+      - "DBA: License Expiration Date"
+      - "DAQ: License Number"
+      - "DCG: Country"
+      - "DAJ: Jurisdiction Code"
+    mechanism:
+      - "Field presence validation"
+      - "Data type and length validation"
+      - "Cross-reference with visual data"
+    evidence: ["reports/aamva_mandatory_fields.json"]
+    tests: ["tests/aamva_mandatory_fields.yaml"]
+    agent_mapping:
+      extract_agent: "AAMVA field extraction"
+      checks_agent: "Mandatory field presence and format validation"
+    status: "active"
+
+  # ISO/IEC 30107-3 Presentation Attack Detection Controls
+  - id: ISO-30107-3-PAD-ASSESSMENT
+    ref: "ISO/IEC 30107-3:2023 §6 (PAD Assessment Methodology)"
+    requirement: "Presentation attack detection metrics reporting"
+    mechanism:
+      - "Liveness detection on face images"
+      - "APCER/BPCER metric calculation"
+      - "Attack presentation classification"
+    evidence: ["reports/pad_assessment.json"]
+    tests: ["tests/iso_pad_metrics.yaml"]
+    agent_mapping:
+      extract_agent: "Face image extraction and quality assessment"
+      checks_agent: "PAD metric calculation and reporting"
+    status: "planned"
+    note: "Illustrative implementation; no formal ISO compliance claimed"
+
+  # Cross-Validation Controls
+  - id: CROSS-VAL-OCR-MRZ
+    ref: "Multi-source data consistency (NIST IAL-2 requirement)"
+    requirement: "OCR text matches MRZ data for critical fields"
+    critical_fields:
+      - "Given names"
+      - "Surname"
+      - "Date of birth"
+      - "Document number"
+      - "Nationality"
+    mechanism:
+      - "PaddleOCR text extraction"
+      - "MRZ field extraction"
+      - "Fuzzy matching with confidence scoring"
+    evidence: ["reports/ocr_mrz_crossval.json"]
+    tests: ["tests/cross_validation.yaml"]
+    agent_mapping:
+      extract_agent: "OCR and MRZ data collection"
+      checks_agent: "Cross-validation logic and confidence scoring"
+      critic_agent: "Discrepancy analysis and reasoning"
+    status: "active"
+
+  - id: CROSS-VAL-VISUAL-BARCODE
+    ref: "AAMVA consistency requirements"
+    requirement: "Visual inspection data matches PDF417 barcode data"
+    mechanism:
+      - "Visual field OCR extraction"
+      - "PDF417 barcode field extraction"
+      - "Field-by-field comparison"
+      - "Discrepancy flagging and scoring"
+    evidence: ["reports/visual_barcode_crossval.json"]
+    tests: ["tests/visual_barcode_consistency.yaml"]
+    agent_mapping:
+      extract_agent: "Visual OCR and barcode data collection"
+      checks_agent: "Consistency validation and scoring"
+    status: "active"
+
+# Agent Assignment Matrix
+agent_responsibilities:
+  preprocess_agent:
+    - "Document image preprocessing"
+    - "Quality assessment and enhancement"
+    - "Region of interest identification"
+
+  extract_agent:
+    - "OCR text extraction (PaddleOCR)"
+    - "MRZ parsing (PassportEye)"
+    - "PDF417 decoding (zxing-cpp)"
+    - "Face image extraction"
+
+  checks_agent:
+    - "ICAO MRZ format and checksum validation"
+    - "AAMVA mandatory field verification"
+    - "Cross-validation between data sources"
+    - "Standards compliance checking"
+
+  critic_agent:
+    - "Overall assessment and reasoning"
+    - "Discrepancy analysis"
+    - "Confidence scoring"
+    - "Traceability matrix generation"
+
+# Compliance Reporting Structure
+reporting:
+  traceability_matrix:
+    format: "markdown_table"
+    columns: ["Control ID", "Requirement", "Mechanism", "Evidence", "Test", "Status", "Agent"]
+
+  evidence_package:
+    - "Raw extracted data (JSON)"
+    - "Validation results (JSON)"
+    - "Cross-validation reports (JSON)"
+    - "Traceability matrix (Markdown)"
+    - "Test execution results (YAML)"
+
+  legal_compliance:
+    boilerplate: |
+      This is a research prototype demonstrating standards-aligned verification workflows.
+      It implements checks consistent with NIST SP 800-63-4, applies MRZ rules from ICAO Doc 9303,
+      parses PDF417 per AAMVA guidance, and illustrates PAD reporting terminology from ISO/IEC 30107-3.
+      It is not a certified system; no claim of formal compliance is made.
+
+# Tool Configuration
+tools:
+  ocr:
+    primary: "PaddleOCR"
+    config:
+      use_angle_cls: true
+      lang: "en"
+
+  mrz:
+    primary: "PassportEye"
+    output_format: "dict"
+
+  pdf417:
+    primary: "zxing-cpp"
+    fallback: "pdf417decoder"
+
+  face_detection:
+    primary: "InsightFace"
+    optional: true

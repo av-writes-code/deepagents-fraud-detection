@@ -1,0 +1,13 @@
+{
+  "document_id": "test_001",
+  "processing_date": "2025-09-21",
+  "preprocessing": {
+    "status": "success",
+    "output": "test_data/processed_simple_text.png"
+  },
+  "standards_applied": {
+    "status": "success",
+    "controls_count": 9
+  },
+  "status": "processed"
+}

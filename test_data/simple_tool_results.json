@@ -1,0 +1,21 @@
+{
+  "opencv": {
+    "status": "success",
+    "operations": [
+      "color_conversion",
+      "blur"
+    ]
+  },
+  "simple_ocr": {
+    "status": "error",
+    "error": "Unknown argument: show_log"
+  },
+  "zxing": {
+    "status": "success",
+    "barcodes_found": 0
+  },
+  "simple_mrz": {
+    "status": "error",
+    "error": "invalid_mrz_format"
+  }
+}

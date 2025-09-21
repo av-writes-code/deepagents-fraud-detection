@@ -1,0 +1,41 @@
+{
+  "opencv": {
+    "status": "success",
+    "success_rate": "100%",
+    "results": [
+      {
+        "image": "id_card_datamatrix.png",
+        "dimensions": "128x128",
+        "brightness": 193.63372802734375,
+        "contrast": 104.8401402956202,
+        "status": "success"
+      },
+      {
+        "image": "id_card_2.png",
+        "dimensions": "128x128",
+        "brightness": 130.61492919921875,
+        "contrast": 120.00079894456476,
+        "status": "success"
+      },
+      {
+        "image": "id_card_1.png",
+        "dimensions": "128x128",
+        "brightness": 193.63372802734375,
+        "contrast": 104.8401402956202,
+        "status": "success"
+      }
+    ]
+  },
+  "paddleocr": {
+    "status": "error",
+    "error": "Unknown argument: show_log"
+  },
+  "passporteye": {
+    "status": "error",
+    "error": "Unknown argument: show_log"
+  },
+  "zxing": {
+    "status": "error",
+    "error": "Unknown argument: show_log"
+  }
+}
