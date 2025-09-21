@@ -113,7 +113,7 @@ See `CODING_MISTAKES_MADE.md` for critical development lessons.
 
 ## License
 
-MIT License - See LICENSE file for details
+This project is released under the MIT License.
 
 ## Disclaimer
 
