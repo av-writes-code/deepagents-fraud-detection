@@ -1,0 +1,19 @@
+thresholds:
+  pad_review: 0.80
+  risk_review: 0.55
+  ocr_conf_low: 0.62
+  quality_min: 0.60
+borderline_band: [0.75, 0.85]
+uncertainty:
+  tta_variance_max: 0.08
+  frame_agreement_min: 0.67
+actions:
+  recapture_once: true
+  second_opinion_on_borderline: true
+fusion:
+  pad_final: max
+timeouts_ms:
+  tool_default: 500
+  recapture_total_budget: 2500
+logging:
+  trace_level: minimal
